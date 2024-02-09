@@ -1,3 +1,3 @@
-import { Hello } from "bun-template";
+import { CellTrackers } from "cell-tracker";
 
-export { Hello };
+export { CellTrackers };
