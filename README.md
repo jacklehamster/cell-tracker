@@ -1,9 +1,9 @@
 # bun-template
-[![npm version](https://badge.fury.io/js/bun-template.svg)](https://www.npmjs.com/package/bun-template)
+[![npm version](https://badge.fury.io/js/cell-tracker.svg)](https://www.npmjs.com/package/bun-template)
 
-Bun template for creating projects using bunjs
+A component for games that tracks viewable cells in a 3d grid, and discards the ones outside the viewable range.
 
-![](https://jacklehamster.github.io/bun-template/icon.png)
+![](https://jacklehamster.github.io/cell-tracker/icon.png)
 ## Install bun
 
 https://bun.sh/
@@ -23,8 +23,8 @@ curl -fsSL https://bun.sh/install | bash
 
 ## Run example
 
-[https://jacklehamster.github.io/bun-template/example/](https://jacklehamster.github.io/bun-template/example/)
+[https://jacklehamster.github.io/cell-tracker/example/](https://jacklehamster.github.io/cell-tracker/example/)
 
 ## Github Source
 
-[https://github.com/jacklehamster/bun-template/](https://github.com/jacklehamster/bun-template/)
+[https://github.com/jacklehamster/cell-tracker/](https://github.com/jacklehamster/cell-tracker/)
