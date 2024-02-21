@@ -9,11 +9,11 @@ export class CellPool extends ObjectPool<Cell, [number, number, number, number]>
       const tag = cellTag(cx, cy, cz, cellSize);
       const x = cx * cellSize, y = cy * cellSize, z = cz * cellSize;
       if (!cell) {
-        return { pos: [cx, cy, cz, cellSize], x, y, z, tag }
+        return { pos: [cx, cy, cz, cellSize], worldPosition: [x, y, z], tag }
       }
-      cell.x = x;
-      cell.y = y;
-      cell.z = z;
+      cell.worldPosition[0] = x;
+      cell.worldPosition[1] = y;
+      cell.worldPosition[2] = z;
       cell.pos[0] = cx;
       cell.pos[1] = cy;
       cell.pos[2] = cz;
