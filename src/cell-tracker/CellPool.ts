@@ -7,9 +7,13 @@ export class CellPool extends ObjectPool<Cell, [number, number, number, number]>
   constructor() {
     super((cell, cx, cy, cz, cellSize) => {
       const tag = cellTag(cx, cy, cz, cellSize);
+      const x = cx * cellSize, y = cy * cellSize, z = cz * cellSize;
       if (!cell) {
-        return { pos: [cx, cy, cz, cellSize], tag }
+        return { pos: [cx, cy, cz, cellSize], x, y, z, tag }
       }
+      cell.x = x;
+      cell.y = y;
+      cell.z = z;
       cell.pos[0] = cx;
       cell.pos[1] = cy;
       cell.pos[2] = cz;

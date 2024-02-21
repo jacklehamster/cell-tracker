@@ -1,8 +1,8 @@
 // /Users/vincent/cell-tracker/example/node_modules/cell-tracker/dist/index.js
-var N = function(m, M, Y, w) {
+var V = function(m, M, Y, w) {
   return m + "," + M + "," + Y + "|" + w;
 };
-class j {
+class O {
   i;
   f;
   warningLimit = 50000;
@@ -41,13 +41,13 @@ class j {
   }
 }
 
-class K extends j {
+class $ extends O {
   constructor() {
     super((m, M, Y, w, H) => {
-      const J = N(M, Y, w, H);
+      const Q = V(M, Y, w, H), W = M * H, J = Y * H, K = w * H;
       if (!m)
-        return { pos: [M, Y, w, H], tag: J };
-      return m.pos[0] = M, m.pos[1] = Y, m.pos[2] = w, m.pos[3] = H, m.tag = J, m;
+        return { pos: [M, Y, w, H], x: W, y: J, z: K, tag: Q };
+      return m.x = W, m.y = J, m.z = K, m.pos[0] = M, m.pos[1] = Y, m.pos[2] = w, m.pos[3] = H, m.tag = Q, m;
     });
   }
   createFromPos(m, M) {
@@ -56,7 +56,7 @@ class K extends j {
   }
 }
 
-class V {
+class I {
   #m = new Set;
   add(m) {
     this.#m.add(m);
@@ -78,7 +78,7 @@ class V {
   }
 }
 
-class I {
+class P {
   i;
   f;
   warningLimit = 50000;
@@ -117,12 +117,12 @@ class I {
   }
 }
 
-class O {
+class X {
   F;
   #m;
   #M;
   #Y = new Map;
-  constructor(m, M = new P) {
+  constructor(m, M = new R) {
     this.pool = M, this.#m = { value: m }, this.#M = { value: m }, this.#m.next = this.#M, this.#M.prev = this.#m;
   }
   clear() {
@@ -185,7 +185,7 @@ class O {
   }
 }
 
-class P extends I {
+class R extends P {
   constructor() {
     super((m, M) => {
       if (!m)
@@ -194,29 +194,29 @@ class P extends I {
     });
   }
 }
-var X = [3, 3, 3];
+var Z = [3, 3, 3];
 
-class R {
-  cellTags = new O("");
+class U {
+  cellTags = new X("");
   cellTrack;
-  cellPool = new K;
+  cellPool = new $;
   range;
   base;
   cellLimit;
   cellSize;
   _trimmedTags = new Set;
   constructor({ cellTrack: m }, { range: M, cellLimit: Y, cellSize: w = 1 } = {}) {
-    this.range = [M?.[0] ?? X[0], M?.[1] ?? X[1], M?.[2] ?? X[2]], this.base = this.range.map((H) => Math.ceil(-H / 2)), this.cellLimit = Math.max(0, Y ?? 10), this.cellSize = w ?? 1, this.cellTrack = m;
+    this.range = [M?.[0] ?? Z[0], M?.[1] ?? Z[1], M?.[2] ?? Z[2]], this.base = this.range.map((H) => Math.ceil(-H / 2)), this.cellLimit = Math.max(0, Y ?? 10), this.cellSize = w ?? 1, this.cellTrack = m;
   }
   visitCell(m) {
     this.#m(m), this.#Y();
   }
   #m(m) {
-    const { range: M, base: Y } = this, { pos: w } = m, H = w[0] + Y[0], J = w[1] + Y[1], _ = w[2] + Y[2];
-    for (let Q = 0;Q < M[0]; Q++)
-      for (let W = 0;W < M[2]; W++)
-        for (let $ = 0;$ < M[1]; $++)
-          this.#M(this.cellPool.create(H + W, J + $, _ + Q, this.cellSize));
+    const { range: M, base: Y } = this, { pos: w } = m, H = w[0] + Y[0], Q = w[1] + Y[1], W = w[2] + Y[2];
+    for (let J = 0;J < M[0]; J++)
+      for (let K = 0;K < M[2]; K++)
+        for (let j = 0;j < M[1]; j++)
+          this.#M(this.cellPool.create(H + K, Q + j, W + J, this.cellSize));
     this.cellPool.clear();
   }
   #M(m) {
@@ -242,7 +242,7 @@ class R {
   }
 }
 
-class Z {
+class N {
   #m;
   #M;
   constructor({ boundary: m, tracker: M }) {
@@ -258,5 +258,5 @@ class Z {
   }
 }
 export {
-  V as CellTrackers
+  I as CellTrackers
 };
