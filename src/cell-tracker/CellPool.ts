@@ -1,4 +1,4 @@
-import { Cell } from "./Cell";
+import { Cell, toCell } from "./Cell";
 import { cellTag } from "./Cell";
 import { Vector } from "dok-types";
 import { ObjectPool } from "bun-pool";
@@ -24,9 +24,9 @@ export class CellPool extends ObjectPool<Cell, [number, number, number, number]>
   }
 
   createFromPos(pos: Vector, cellSize: number): Cell {
-    const cx = Math.round(pos[0] / cellSize);
-    const cy = Math.round(pos[1] / cellSize);
-    const cz = Math.round(pos[2] / cellSize);
+    const cx = toCell(pos[0], cellSize);
+    const cy = toCell(pos[1], cellSize);
+    const cz = toCell(pos[2], cellSize);
     return this.create(cx, cy, cz, cellSize);
   }
 }

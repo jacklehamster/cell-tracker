@@ -11,3 +11,7 @@ export type Cell = {
 export function cellTag(x: number, y: number, z: number, cellSize: number) {
   return x + "," + y + "," + z + "|" + cellSize;
 }
+
+export function toCell(x: number, cellSize: number) {
+  return Math.round(x / cellSize);
+}
