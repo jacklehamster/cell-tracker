@@ -2,7 +2,7 @@
   "name": "cell-tracker",
   "module": "src/index.ts",
   "description": "A component for games that tracks viewable cells in a 3d grid, and discards the ones outside the viewable range.",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "keywords": [
     "bun",
     "bunjs",
