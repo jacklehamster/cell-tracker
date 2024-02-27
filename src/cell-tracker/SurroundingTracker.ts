@@ -1,5 +1,5 @@
 import { Cell, Tag } from "./Cell";
-import { IVisitableCell } from "./IVisitableCell";
+import { ICellListener } from "./ICellListener";
 import { DoubleLinkList, FreeStack } from "free-stack";
 import { ICellTracker } from "./ICellTracker";
 import { CellPool } from "./CellPool";
@@ -16,7 +16,7 @@ interface Props {
 
 const DEFAULT_RANGE = [3, 3, 3];
 
-export class SurroundingTracker implements IVisitableCell {
+export class SurroundingTracker implements ICellListener {
   private readonly cellTags: FreeStack<Tag> = new DoubleLinkList<Tag>("");
   private readonly cellTrack;
   private readonly cellPool: CellPool = new CellPool();
@@ -34,7 +34,7 @@ export class SurroundingTracker implements IVisitableCell {
     this.cellTrack = cellTrack;
   }
 
-  visitCell(visitedCell: Cell): void {
+  onCell(visitedCell: Cell): void {
     this.#iterateCells(visitedCell);
     this.#trimCells();
   }

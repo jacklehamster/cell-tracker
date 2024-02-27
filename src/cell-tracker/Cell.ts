@@ -1,6 +1,7 @@
 import { Vector } from "dok-types";
 
 export type Tag = string;
+export const CELL_SIZE_INDEX = 3;
 
 export type Cell = {
   pos: [number, number, number, number];
