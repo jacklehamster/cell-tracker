@@ -1,241 +1,246 @@
 // /Users/vincent/cell-tracker/example/node_modules/cell-tracker/dist/index.js
-var U = function(Y, m, w, H) {
-  return Y + "," + m + "," + w + "|" + H;
+var N = function(m, Y, w, H) {
+  const J = u(m, Y, w, H), V = m * H, W = Y * H, K = w * H;
+  return { pos: [m, Y, w, H], worldPosition: [V, W, K], tag: J };
 };
-var $ = function(Y, m) {
-  return Math.round(Y / m);
+var X = function(m, Y, w, H, J) {
+  const V = u(Y, w, H, J), W = Y * J, K = w * J, $ = H * J;
+  return m.worldPosition[0] = W, m.worldPosition[1] = K, m.worldPosition[2] = $, m.pos[0] = Y, m.pos[1] = w, m.pos[2] = H, m.pos[3] = J, m.tag = V, m;
 };
-var R = 3;
+var u = function(m, Y, w, H) {
+  return m + "," + Y + "," + w + "|" + H;
+};
+var j = function(m, Y) {
+  return Math.round(m / Y);
+};
+var M = 3;
 
-class N {
+class Z {
   i;
   f;
   warningLimit = 50000;
-  #Y = new Set;
-  #m = [];
-  constructor(Y, m) {
-    this.initCall = Y, this.onRecycle = m;
+  #m = new Set;
+  #Y = [];
+  constructor(m, Y) {
+    this.initCall = m, this.onRecycle = Y;
   }
-  create(...Y) {
-    const m = this.#m.pop();
-    if (m)
-      return this.#Y.add(m), this.initCall(m, ...Y);
-    const w = this.initCall(undefined, ...Y);
-    return this.#Y.add(w), this.#H(), w;
+  create(...m) {
+    const Y = this.#Y.pop();
+    if (Y)
+      return this.#m.add(Y), this.initCall(Y, ...m);
+    const w = this.initCall(undefined, ...m);
+    return this.#m.add(w), this.#H(), w;
   }
-  recycle(Y) {
-    this.#Y.delete(Y), this.#w(Y);
+  recycle(m) {
+    this.#m.delete(m), this.#w(m);
   }
   recycleAll() {
-    for (let Y of this.#Y)
-      this.#w(Y);
-    this.#Y.clear();
+    for (let m of this.#m)
+      this.#w(m);
+    this.#m.clear();
   }
   clear() {
-    this.#m.length = 0, this.#Y.clear();
+    this.#Y.length = 0, this.#m.clear();
   }
   countObjectsInExistence() {
-    return this.#Y.size + this.#m.length;
+    return this.#m.size + this.#Y.length;
   }
-  #w(Y) {
-    this.#m.push(Y), this.onRecycle?.(Y);
+  #w(m) {
+    this.#Y.push(m), this.onRecycle?.(m);
   }
   #H() {
     if (this.countObjectsInExistence() === this.warningLimit)
-      console.warn("ObjectPool already created", this.#Y.size + this.#m.length, "in", this.constructor.name);
+      console.warn("ObjectPool already created", this.#m.size + this.#Y.length, "in", this.constructor.name);
   }
 }
 
-class W extends N {
+class Q extends Z {
   constructor() {
-    super((Y, m, w, H, J) => {
-      const j = U(m, w, H, J), O = m * J, K = w * J, Q = H * J;
-      if (!Y)
-        return { pos: [m, w, H, J], worldPosition: [O, K, Q], tag: j };
-      return Y.worldPosition[0] = O, Y.worldPosition[1] = K, Y.worldPosition[2] = Q, Y.pos[0] = m, Y.pos[1] = w, Y.pos[2] = H, Y.pos[3] = J, Y.tag = j, Y;
+    super((m, Y, w, H, J) => {
+      return !m ? N(Y, w, H, J) : X(m, Y, w, H, J);
     });
   }
-  createFromPos(Y, m) {
-    const w = $(Y[0], m), H = $(Y[1], m), J = $(Y[2], m);
-    return this.create(w, H, J, m);
+  createFromPos(m, Y) {
+    const w = j(m[0], Y), H = j(m[1], Y), J = j(m[2], Y);
+    return this.create(w, H, J, Y);
   }
 }
 
-class M {
-  #Y = new Set;
-  add(Y) {
-    this.#Y.add(Y);
+class G {
+  #m = new Set;
+  add(m) {
+    this.#m.add(m);
   }
-  remove(Y) {
-    this.#Y.delete(Y);
+  remove(m) {
+    this.#m.delete(m);
   }
-  trackCell(Y) {
-    let m = false;
-    return this.#Y.forEach((w) => {
-      if (w.trackCell(Y))
-        m = true;
-    }), m;
+  trackCell(m) {
+    let Y = false;
+    return this.#m.forEach((w) => {
+      if (w.trackCell(m))
+        Y = true;
+    }), Y;
   }
-  untrackCells(Y) {
-    this.#Y.forEach((m) => {
-      m.untrackCells(Y);
+  untrackCells(m) {
+    this.#m.forEach((Y) => {
+      Y.untrackCells(m);
     });
   }
 }
 
-class u {
+class I {
   i;
   f;
   warningLimit = 50000;
-  #Y = new Set;
-  #m = [];
-  constructor(Y, m) {
-    this.initCall = Y, this.onRecycle = m;
+  #m = new Set;
+  #Y = [];
+  constructor(m, Y) {
+    this.initCall = m, this.onRecycle = Y;
   }
-  create(...Y) {
-    const m = this.#m.pop();
-    if (m)
-      return this.#Y.add(m), this.initCall(m, ...Y);
-    const w = this.initCall(undefined, ...Y);
-    return this.#Y.add(w), this.#H(), w;
+  create(...m) {
+    const Y = this.#Y.pop();
+    if (Y)
+      return this.#m.add(Y), this.initCall(Y, ...m);
+    const w = this.initCall(undefined, ...m);
+    return this.#m.add(w), this.#H(), w;
   }
-  recycle(Y) {
-    this.#Y.delete(Y), this.#w(Y);
+  recycle(m) {
+    this.#m.delete(m), this.#w(m);
   }
   recycleAll() {
-    for (let Y of this.#Y)
-      this.#w(Y);
-    this.#Y.clear();
+    for (let m of this.#m)
+      this.#w(m);
+    this.#m.clear();
   }
   clear() {
-    this.#m.length = 0, this.#Y.clear();
+    this.#Y.length = 0, this.#m.clear();
   }
   countObjectsInExistence() {
-    return this.#Y.size + this.#m.length;
+    return this.#m.size + this.#Y.length;
   }
-  #w(Y) {
-    this.#m.push(Y), this.onRecycle?.(Y);
+  #w(m) {
+    this.#Y.push(m), this.onRecycle?.(m);
   }
   #H() {
     if (this.countObjectsInExistence() === this.warningLimit)
-      console.warn("ObjectPool already created", this.#Y.size + this.#m.length, "in", this.constructor.name);
+      console.warn("ObjectPool already created", this.#m.size + this.#Y.length, "in", this.constructor.name);
   }
 }
 
-class X {
+class B {
   F;
-  #Y;
   #m;
+  #Y;
   #w = new Map;
-  constructor(Y, m = new G) {
-    this.pool = m, this.#Y = { value: Y }, this.#m = { value: Y }, this.#Y.next = this.#m, this.#m.prev = this.#Y;
+  constructor(m, Y = new _) {
+    this.pool = Y, this.#m = { value: m }, this.#Y = { value: m }, this.#m.next = this.#Y, this.#Y.prev = this.#m;
   }
   clear() {
-    while (this.#J(this.#Y.next))
+    while (this.#J(this.#m.next))
       ;
   }
   get size() {
     return this.#w.size;
   }
-  contains(Y) {
-    return this.#w.has(Y);
+  contains(m) {
+    return this.#w.has(m);
   }
-  pushTop(Y) {
-    this.#Q(this.#K(Y));
+  pushTop(m) {
+    this.#Q(this.#K(m));
   }
-  pushBottom(Y) {
-    this.#W(this.#K(Y));
+  pushBottom(m) {
+    this.#V(this.#K(m));
   }
-  moveToTop(Y) {
-    const m = this.#w.get(Y);
-    if (m)
-      return this.#H(m), this.#Q(m), true;
+  moveToTop(m) {
+    const Y = this.#w.get(m);
+    if (Y)
+      return this.#H(Y), this.#Q(Y), true;
     return false;
   }
-  moveToBottom(Y) {
-    const m = this.#w.get(Y);
-    if (m)
-      return this.#H(m), this.#W(m), true;
+  moveToBottom(m) {
+    const Y = this.#w.get(m);
+    if (Y)
+      return this.#H(Y), this.#V(Y), true;
     return false;
   }
   popBottom() {
-    return this.#J(this.#Y.next);
+    return this.#J(this.#m.next);
   }
   popTop() {
-    return this.#J(this.#m.prev);
+    return this.#J(this.#Y.prev);
   }
-  #H(Y) {
-    if (Y === this.#m || Y === this.#Y)
+  #H(m) {
+    if (m === this.#Y || m === this.#m)
       return false;
-    if (Y.prev && Y.next)
-      Y.prev.next = Y.next, Y.next.prev = Y.prev;
-    return Y.prev = Y.next = undefined, true;
+    if (m.prev && m.next)
+      m.prev.next = m.next, m.next.prev = m.prev;
+    return m.prev = m.next = undefined, true;
   }
-  #K(Y) {
-    const m = this.pool.create(Y);
-    return this.#w.set(Y, m), m;
+  #K(m) {
+    const Y = this.pool.create(m);
+    return this.#w.set(m, Y), Y;
   }
-  #J(Y) {
-    if (!this.#H(Y))
+  #J(m) {
+    if (!this.#H(m))
       return;
-    return this.pool.recycle(Y), this.#w.delete(Y.value), Y.value;
+    return this.pool.recycle(m), this.#w.delete(m.value), m.value;
   }
-  #Q(Y) {
-    const m = this.#m.prev, w = Y;
-    w.prev = m, w.next = this.#m, m.next = this.#m.prev = w;
+  #Q(m) {
+    const Y = this.#Y.prev, w = m;
+    w.prev = Y, w.next = this.#Y, Y.next = this.#Y.prev = w;
   }
-  #W(Y) {
-    const m = this.#Y.next, w = Y;
-    w.next = m, w.prev = this.#Y, m.prev = this.#Y.next = w;
+  #V(m) {
+    const Y = this.#m.next, w = m;
+    w.next = Y, w.prev = this.#m, Y.prev = this.#m.next = w;
   }
 }
 
-class G extends u {
+class _ extends I {
   constructor() {
-    super((Y, m) => {
-      if (!Y)
-        return { value: m };
-      return Y.value = m, Y.prev = undefined, Y.next = undefined, Y;
+    super((m, Y) => {
+      if (!m)
+        return { value: Y };
+      return m.value = Y, m.prev = undefined, m.next = undefined, m;
     });
   }
 }
-var Z = [3, 3, 3];
+var R = [3, 3, 3];
 
-class I {
-  cellTags = new X("");
+class A {
+  cellTags = new B("");
   cellTrack;
-  cellPool = new W;
+  cellPool = new Q;
   range;
   base;
   cellLimit;
   cellSize;
   _trimmedTags = new Set;
-  constructor({ cellTrack: Y }, { range: m, cellLimit: w, cellSize: H = 1 } = {}) {
-    this.range = [m?.[0] ?? Z[0], m?.[1] ?? Z[1], m?.[2] ?? Z[2]], this.base = this.range.map((J) => Math.ceil(-J / 2)), this.cellLimit = Math.max(0, w ?? 10), this.cellSize = H ?? 1, this.cellTrack = Y;
+  constructor({ cellTrack: m }, { range: Y, cellLimit: w, cellSize: H = 1 } = {}) {
+    this.range = [Y?.[0] ?? R[0], Y?.[1] ?? R[1], Y?.[2] ?? R[2]], this.base = this.range.map((J) => Math.ceil(-J / 2)), this.cellLimit = Math.max(0, w ?? 10), this.cellSize = H ?? 1, this.cellTrack = m;
   }
-  onCell(Y) {
-    this.#Y(Y), this.#w();
+  onCell(m) {
+    this.#m(m), this.#w();
   }
-  #Y(Y) {
-    const { range: m, base: w } = this, { pos: H } = Y, J = H[0] + w[0], j = H[1] + w[1], O = H[2] + w[2];
-    for (let K = 0;K < m[0]; K++)
-      for (let Q = 0;Q < m[2]; Q++)
-        for (let V = 0;V < m[1]; V++)
-          this.#m(this.cellPool.create(J + Q, j + V, O + K, this.cellSize));
+  #m(m) {
+    const { range: Y, base: w } = this, { pos: H } = m, J = H[0] + w[0], V = H[1] + w[1], W = H[2] + w[2];
+    for (let K = 0;K < Y[0]; K++)
+      for (let $ = 0;$ < Y[2]; $++)
+        for (let O = 0;O < Y[1]; O++)
+          this.#Y(this.cellPool.create(J + $, V + O, W + K, this.cellSize));
     this.cellPool.clear();
   }
-  #m(Y) {
-    if (!this.cellTags.contains(Y.tag)) {
-      if (this.cellTrack.trackCell(Y))
-        this.cellTags.pushTop(Y.tag);
+  #Y(m) {
+    if (!this.cellTags.contains(m.tag)) {
+      if (this.cellTrack.trackCell(m))
+        this.cellTags.pushTop(m.tag);
     } else
-      this.cellTags.moveToTop(Y.tag);
+      this.cellTags.moveToTop(m.tag);
   }
   #w() {
     while (this.cellTags.size > this.cellLimit) {
-      const Y = this.cellTags.popBottom();
-      if (Y)
-        this._trimmedTags.add(Y);
+      const m = this.cellTags.popBottom();
+      if (m)
+        this._trimmedTags.add(m);
       else
         break;
     }
@@ -247,46 +252,46 @@ class I {
   }
 }
 
-class B {
-  #Y;
+class U {
   #m;
-  constructor({ boundary: Y, tracker: m }) {
-    this.#Y = Y, this.#m = m;
+  #Y;
+  constructor({ boundary: m, tracker: Y }) {
+    this.#m = m, this.#Y = Y;
   }
-  trackCell(Y) {
-    if (!this.#Y.include(Y))
+  trackCell(m) {
+    if (!this.#m.include(m))
       return false;
-    return this.#m.trackCell(Y);
+    return this.#Y.trackCell(m);
   }
-  untrackCells(Y) {
-    this.#m.untrackCells(Y);
+  untrackCells(m) {
+    this.#Y.untrackCells(m);
   }
 }
-class A {
-  #Y = new Set;
+class E {
+  #m = new Set;
   positionMatrix;
   previousCell;
   listener = { onChange: () => this.#w(this.positionMatrix) };
-  #m = new W;
-  constructor({ positionMatrix: Y }, m) {
-    const w = m?.cellSize ?? 1;
-    this.previousCell = this.#m.create(Number.NaN, Number.NaN, Number.NaN, w), this.positionMatrix = Y;
+  #Y = new Q;
+  constructor({ positionMatrix: m }, Y) {
+    const w = Y?.cellSize ?? 1;
+    this.previousCell = this.#Y.create(Number.NaN, Number.NaN, Number.NaN, w), this.positionMatrix = m;
   }
-  addListener(Y) {
-    return this.#Y.add(Y), this;
+  addListener(m) {
+    return this.#m.add(m), this;
   }
-  removeListener(Y) {
-    this.#Y.delete(Y);
+  removeListener(m) {
+    this.#m.delete(m);
   }
-  #w(Y) {
-    let m = this.#m.createFromPos(Y.position, this.previousCell.pos[R]);
-    if (this.previousCell.pos[0] !== m.pos[0] || this.previousCell.pos[1] !== m.pos[1] || this.previousCell.pos[2] !== m.pos[2]) {
-      for (let H of this.#Y)
-        H.onCell(m, this.previousCell);
+  #w(m) {
+    let Y = this.#Y.createFromPos(m.position, this.previousCell.pos[M]);
+    if (this.previousCell.pos[0] !== Y.pos[0] || this.previousCell.pos[1] !== Y.pos[1] || this.previousCell.pos[2] !== Y.pos[2]) {
+      for (let H of this.#m)
+        H.onCell(Y, this.previousCell);
       const w = this.previousCell;
-      this.previousCell = m, m = w;
+      this.previousCell = Y, Y = w;
     }
-    this.#m.recycle(m);
+    this.#Y.recycle(Y);
   }
   activate() {
     this.positionMatrix.addChangeListener(this.listener), this.previousCell.pos[0] = Number.NaN, this.previousCell.pos[1] = Number.NaN, this.previousCell.pos[2] = Number.NaN, this.#w(this.positionMatrix);
@@ -296,5 +301,5 @@ class A {
   }
 }
 export {
-  M as CellTrackers
+  G as CellTrackers
 };
