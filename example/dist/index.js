@@ -1,21 +1,21 @@
 // /Users/vincent/cell-tracker/example/node_modules/cell-tracker/dist/index.js
 var N = function(m, Y, w, H) {
-  const J = u(m, Y, w, H), V = m * H, W = Y * H, K = w * H;
+  const J = Z(m, Y, w, H), V = m * H, W = Y * H, K = w * H;
   return { pos: [m, Y, w, H], worldPosition: [V, W, K], tag: J };
 };
 var X = function(m, Y, w, H, J) {
-  const V = u(Y, w, H, J), W = Y * J, K = w * J, $ = H * J;
+  const V = Z(Y, w, H, J), W = Y * J, K = w * J, $ = H * J;
   return m.worldPosition[0] = W, m.worldPosition[1] = K, m.worldPosition[2] = $, m.pos[0] = Y, m.pos[1] = w, m.pos[2] = H, m.pos[3] = J, m.tag = V, m;
 };
-var u = function(m, Y, w, H) {
+var Z = function(m, Y, w, H) {
   return m + "," + Y + "," + w + "|" + H;
 };
 var j = function(m, Y) {
   return Math.round(m / Y);
 };
-var M = 3;
+var u = 3;
 
-class Z {
+class B {
   i;
   f;
   warningLimit = 50000;
@@ -54,7 +54,7 @@ class Z {
   }
 }
 
-class Q extends Z {
+class Q extends B {
   constructor() {
     super((m, Y, w, H, J) => {
       return !m ? N(Y, w, H, J) : X(m, Y, w, H, J);
@@ -127,7 +127,7 @@ class I {
   }
 }
 
-class B {
+class R {
   F;
   #m;
   #Y;
@@ -204,10 +204,10 @@ class _ extends I {
     });
   }
 }
-var R = [3, 3, 3];
+var U = [3, 3, 3];
 
 class A {
-  cellTags = new B("");
+  cellTags = new R("");
   cellTrack;
   cellPool = new Q;
   range;
@@ -216,7 +216,7 @@ class A {
   cellSize;
   _trimmedTags = new Set;
   constructor({ cellTrack: m }, { range: Y, cellLimit: w, cellSize: H = 1 } = {}) {
-    this.range = [Y?.[0] ?? R[0], Y?.[1] ?? R[1], Y?.[2] ?? R[2]], this.base = this.range.map((J) => Math.ceil(-J / 2)), this.cellLimit = Math.max(0, w ?? 10), this.cellSize = H ?? 1, this.cellTrack = m;
+    this.range = [Y?.[0] ?? U[0], Y?.[1] ?? U[1], Y?.[2] ?? U[2]], this.base = this.range.map((J) => Math.ceil(-J / 2)), this.cellLimit = Math.max(0, w ?? 10), this.cellSize = H ?? 1, this.cellTrack = m;
   }
   onCell(m) {
     this.#m(m), this.#w();
@@ -252,7 +252,7 @@ class A {
   }
 }
 
-class U {
+class M {
   #m;
   #Y;
   constructor({ boundary: m, tracker: Y }) {
@@ -284,7 +284,7 @@ class E {
     this.#m.delete(m);
   }
   #w(m) {
-    let Y = this.#Y.createFromPos(m.position, this.previousCell.pos[M]);
+    let Y = this.#Y.createFromPos(m.position, this.previousCell.pos[u]);
     if (this.previousCell.pos[0] !== Y.pos[0] || this.previousCell.pos[1] !== Y.pos[1] || this.previousCell.pos[2] !== Y.pos[2]) {
       for (let H of this.#m)
         H.onCell(Y, this.previousCell);

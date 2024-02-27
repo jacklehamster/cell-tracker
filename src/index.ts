@@ -1,4 +1,4 @@
-import { Cell, Tag, toCell, createCell, updateCell } from "./cell-tracker/Cell";
+import { Cell, Tag, toCell, createCell, updateCell, cellTag } from "./cell-tracker/Cell";
 import { CellPool } from "./cell-tracker/CellPool";
 import { CellTrackers } from "./cell-tracker/CellTrackers";
 import { ICellTracker } from "./cell-tracker/ICellTracker";
@@ -10,5 +10,5 @@ import { CellBoundary } from "./boundary/CellBoundary";
 import { ICellChangeDetector } from "./cell-tracker/ICellChangeDetector";
 import { CellChangeDetector } from "./cell-tracker/CellChangeDetector";
 
-export { CellPool, CellTrackers, SurroundingTracker, FilteredCellTracker, filter, CellBoundary, toCell, CellChangeDetector, createCell, updateCell };
+export { CellPool, CellTrackers, SurroundingTracker, FilteredCellTracker, filter, CellBoundary, toCell, CellChangeDetector, createCell, updateCell, cellTag };
 export type { Cell, ICellListener as IVisitableCell, ICellTracker, Tag, IBoundary, ICellChangeDetector };
