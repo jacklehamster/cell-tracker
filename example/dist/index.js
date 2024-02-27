@@ -273,7 +273,7 @@ class A {
     this.previousCell = this.#m.create(Number.NaN, Number.NaN, Number.NaN, w), this.positionMatrix = Y;
   }
   addListener(Y) {
-    this.#Y.add(Y);
+    return this.#Y.add(Y), this;
   }
   removeListener(Y) {
     this.#Y.delete(Y);

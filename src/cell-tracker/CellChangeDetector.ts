@@ -33,8 +33,9 @@ export class CellChangeDetector implements Active, ICellChangeDetector {
     this.positionMatrix = positionMatrix;
   }
 
-  addListener(listener: ICellListener): void {
+  addListener(listener: ICellListener): this {
     this.#listeners.add(listener);
+    return this;
   }
 
   removeListener(listener: ICellListener): void {

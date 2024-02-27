@@ -1,6 +1,6 @@
 import { ICellListener } from "./ICellListener";
 
 export interface ICellChangeDetector {
-  addListener(listener: ICellListener): void;
+  addListener(listener: ICellListener): this;
   removeListener(listener: ICellListener): void;
 }
