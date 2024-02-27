@@ -7,6 +7,8 @@ import { SurroundingTracker } from "./cell-tracker/SurroundingTracker";
 import { FilteredCellTracker, filter } from "./boundary/FilteredCellTracker";
 import { IBoundary } from "./boundary/IBoundary";
 import { CellBoundary } from "./boundary/CellBoundary";
+import { ICellChangeDetector } from "./cell-tracker/ICellChangeDetector";
+import { CellChangeDetector } from "./cell-tracker/CellChangeDetector";
 
-export { CellPool, CellTrackers, SurroundingTracker, FilteredCellTracker, filter, CellBoundary, toCell };
-export type { Cell, ICellListener as IVisitableCell, ICellTracker, Tag, IBoundary };
+export { CellPool, CellTrackers, SurroundingTracker, FilteredCellTracker, filter, CellBoundary, toCell, CellChangeDetector };
+export type { Cell, ICellListener as IVisitableCell, ICellTracker, Tag, IBoundary, ICellChangeDetector };
