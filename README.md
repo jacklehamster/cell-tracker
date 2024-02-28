@@ -1,4 +1,5 @@
-# bun-template
+# cell-tracker
+
 [![npm version](https://badge.fury.io/js/cell-tracker.svg)](https://www.npmjs.com/package/bun-template)
 
 A component for games that tracks viewable cells in a 3d grid, and discards the ones outside the viewable range.
