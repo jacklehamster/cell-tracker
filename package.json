@@ -68,6 +68,6 @@
     "change-listener": "^1.0.1",
     "dok-matrix": "^1.0.14",
     "dok-types": "^1.0.7",
-    "free-stack": "^1.0.3"
+    "free-stack": "^1.0.4"
   }
 }
