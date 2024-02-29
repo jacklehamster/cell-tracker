@@ -43,8 +43,12 @@ export class CellChangeDetector implements Active, ICellChangeDetector {
   }
 
   #checkPosition(posMatrix: IPositionMatrix): void {
-    let cell = this.#cellPool.createFromPos(posMatrix.position, this.#previousCell.pos[CELL_SIZE_INDEX]);
-    if (this.#previousCell.pos[0] !== cell.pos[0] || this.#previousCell.pos[1] !== cell.pos[1] || this.#previousCell.pos[2] !== cell.pos[2]) {
+    let cell = this.#cellPool.createFromPos(
+      posMatrix.position,
+      this.#previousCell.pos[CELL_SIZE_INDEX]);
+    if (this.#previousCell.pos[0] !== cell.pos[0]
+      || this.#previousCell.pos[1] !== cell.pos[1]
+      || this.#previousCell.pos[2] !== cell.pos[2]) {
       for (const listener of this.#listeners) {
         listener.onCell(cell, this.#previousCell);
       }
@@ -56,10 +60,10 @@ export class CellChangeDetector implements Active, ICellChangeDetector {
   }
 
   activate(): void {
-    this.#positionMatrix.addChangeListener(this.#listener);
     this.#previousCell.pos[0] = Number.NaN;
     this.#previousCell.pos[1] = Number.NaN;
     this.#previousCell.pos[2] = Number.NaN;
+    this.#positionMatrix.addChangeListener(this.#listener);
     this.#checkPosition(this.#positionMatrix);
   }
 

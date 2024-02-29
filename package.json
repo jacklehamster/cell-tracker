@@ -64,10 +64,9 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "bun-pool": "^1.0.8",
+    "bun-pool": "^1.0.9",
     "change-listener": "^1.0.1",
-    "dok-matrix": "^1.0.14",
-    "dok-types": "^1.0.7",
-    "free-stack": "^1.0.4"
+    "dok-matrix": "^1.0.20",
+    "free-stack": "^1.0.5"
   }
 }
