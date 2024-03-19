@@ -1,4 +1,4 @@
-import { Cell } from "../cell-tracker/Cell";
+import { Cell } from "../Cell";
 
 export interface IBoundary {
   include(cell: Cell): boolean;

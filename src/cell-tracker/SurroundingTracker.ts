@@ -1,4 +1,4 @@
-import { Cell, Tag } from "./Cell";
+import { Cell, Tag } from "../Cell";
 import { ICellListener } from "./ICellListener";
 import { DoubleLinkList, FreeStack } from "free-stack";
 import { ICellTracker } from "./ICellTracker";

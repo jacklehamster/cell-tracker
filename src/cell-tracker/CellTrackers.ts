@@ -1,4 +1,4 @@
-import { Cell } from "./Cell";
+import { Cell } from "../Cell";
 import { ICellTracker } from "./ICellTracker";
 
 export class CellTrackers implements ICellTracker {
@@ -21,6 +21,7 @@ export class CellTrackers implements ICellTracker {
     });
     return track;
   }
+
   untrackCells(cellTags: Set<string>): void {
     this.#cellTrackers.forEach(tracker => {
       tracker.untrackCells(cellTags);

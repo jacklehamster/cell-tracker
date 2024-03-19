@@ -1,4 +1,4 @@
-import { Cell } from "../cell-tracker/Cell";
+import { Cell } from "../Cell";
 import { IBoundary } from "./IBoundary";
 
 

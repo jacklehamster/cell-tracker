@@ -1,7 +1,7 @@
 import { IMatrix, IPositionMatrix } from "dok-matrix";
 import { Active } from "dok-types";
 import { ICellListener } from "./ICellListener";
-import { CELL_SIZE_INDEX, Cell } from "./Cell";
+import { CELL_SIZE_INDEX, Cell } from "../Cell";
 import { IChangeListener } from "change-listener";
 import { CellPool } from "./CellPool";
 import { ICellChangeDetector } from "./ICellChangeDetector";

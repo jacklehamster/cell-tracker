@@ -1,5 +1,5 @@
-import { Cell, createCell, toCell, updateCell } from "./Cell";
-import { cellTag } from "./Cell";
+import { Cell, createCell, toCell, updateCell } from "../Cell";
+import { cellTag } from "../Cell";
 import { Vector } from "dok-types";
 import { ObjectPool } from "bun-pool";
 
