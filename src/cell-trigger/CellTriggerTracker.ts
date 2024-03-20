@@ -18,21 +18,29 @@ export class CellTriggerTracker implements ICellTracker {
 
   addTrigger(trigger?: ICellTrigger) {
     if (trigger) {
-      const triggers = this.#triggers[trigger.cell.tag] ?? (this.#triggers[trigger.cell.tag] = []);
-      triggers.push(trigger);
+      forEach(trigger.cells, cell => {
+        if (cell) {
+          const triggers = this.#triggers[cell.tag] ?? (this.#triggers[cell.tag] = []);
+          triggers.push(trigger);
+        }
+      });
     }
   }
 
   removeTrigger(trigger?: ICellTrigger) {
     if (trigger) {
-      const triggers = this.#triggers[trigger.cell.tag]?.filter(t => t === trigger);
-      if (triggers) {
-        if (triggers.length) {
-          this.#triggers[trigger.cell.tag] = triggers;
-        } else {
-          delete this.#triggers[trigger.cell.tag];
+      forEach(trigger.cells, cell => {
+        if (cell) {
+          const triggers = this.#triggers[cell.tag]?.filter(t => t === trigger);
+          if (triggers) {
+            if (triggers.length) {
+              this.#triggers[cell.tag] = triggers;
+            } else {
+              delete this.#triggers[cell.tag];
+            }
+          }
         }
-      }
+      });
     }
   }
 

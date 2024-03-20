@@ -4,7 +4,7 @@ import { ICellTrigger, createCell, CellTriggerTracker } from '..';
 describe('cell-trigger-tracker', () => {
   it('trigger tracked cells', () => {
     const cellTrigger: ICellTrigger = {
-      cell: createCell(5, 5, 5, 1),
+      cells: [createCell(5, 5, 5, 1)],
       activate: jest.fn(),
       deactivate: jest.fn(),
     };
