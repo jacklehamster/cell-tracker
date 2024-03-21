@@ -10,7 +10,7 @@ interface Props {
 export class CellTriggerTracker implements ICellTracker {
   readonly #triggers: Record<string, ICellTrigger[]> = {};
 
-  constructor({ triggers }: Props) {
+  constructor({ triggers }: Props = {}) {
     if (triggers) {
       forEach(triggers, trigger => this.addTrigger(trigger));
     }
