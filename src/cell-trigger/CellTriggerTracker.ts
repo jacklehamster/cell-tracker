@@ -9,6 +9,7 @@ interface Props {
 
 export class CellTriggerTracker implements ICellTracker {
   readonly #triggers: Record<string, ICellTrigger[]> = {};
+  readonly #activatedTrigger = new Set<ICellTrigger>()
 
   constructor({ triggers }: Props = {}) {
     if (triggers) {
@@ -48,7 +49,10 @@ export class CellTriggerTracker implements ICellTracker {
     const cellTriggers = this.#triggers[cell.tag];
     if (cellTriggers) {
       for (let trigger of cellTriggers) {
-        trigger.activate();
+        if (!this.#activatedTrigger.has(trigger)) {
+          trigger.activate();
+          this.#activatedTrigger.add(trigger);
+        }
       }
     }
     return false;
@@ -59,7 +63,10 @@ export class CellTriggerTracker implements ICellTracker {
       const cellTriggers = this.#triggers[tag];
       if (cellTriggers) {
         for (let trigger of cellTriggers) {
-          trigger.deactivate();
+          if (this.#activatedTrigger.has(trigger)) {
+            trigger.deactivate();
+            this.#activatedTrigger.delete(trigger);
+          }
         }
       }
     }
